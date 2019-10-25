@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 
 import { beerQuery } from "../actions/index.js";
 
+import Button from "@material-ui/core/Button";
+
+import { makeStyles } from "@material-ui/core/styles";
+
 class BeerQuery extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +17,13 @@ class BeerQuery extends Component {
   }
 
   handleOnClick = () => {
+    if (this.state.foodName.trim() === "") {
+      alert("Please enter a food name !");
+      return false;
+    }
+
     this.props.onBeerQuery(this.state.foodName);
+    this.setState({ foodName: "" });
   };
 
   handleChange = event => {

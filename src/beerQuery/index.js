@@ -6,7 +6,9 @@ import { beerQuery } from "../actions/index.js";
 
 import Button from "@material-ui/core/Button";
 
-import { makeStyles } from "@material-ui/core/styles";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
+import theme from "../theme";
 
 class BeerQuery extends Component {
   constructor(props) {
@@ -36,15 +38,26 @@ class BeerQuery extends Component {
     const { foodName } = this.state;
 
     return (
-      <div className="beerSelection">
+      <div>
         <input
           type="text"
           placeholder="Food name"
           value={foodName}
           onChange={this.handleChange}
         />
-
-        <button onClick={this.handleOnClick}>Send</button>
+        <MuiThemeProvider>
+          <Button
+            theme={theme}
+            onClick={this.handleOnClick}
+            style={{
+              backgroundColor: theme.palette.primary.main
+            }}
+            variant="contained"
+            color="primary"
+          >
+            Send
+          </Button>
+        </MuiThemeProvider>
       </div>
     );
   }

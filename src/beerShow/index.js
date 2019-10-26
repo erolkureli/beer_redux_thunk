@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import "./beerShow.css";
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
 class BeerSelection extends Component {
   renderTableData() {
     const beerArray = Object.keys(this.props.beerList).map(
@@ -10,11 +19,18 @@ class BeerSelection extends Component {
     return beerArray.map((beer, index) => {
       const { name, description, first_brewed } = beer;
       return (
-        <tr key={name}>
-          <td>{name}</td>
-          <td>{description}</td>
-          <td>{first_brewed}</td>
-        </tr>
+        <TableRow
+          key={name}
+          style={
+            index % 2 ? { background: "#dc143c" } : { background: "white" }
+          }
+        >
+          <TableCell component="th" scope="row">
+            {name}
+          </TableCell>
+          <TableCell align="center">{description}</TableCell>
+          <TableCell align="right">{first_brewed}</TableCell>
+        </TableRow>
       );
     });
   }
@@ -22,10 +38,18 @@ class BeerSelection extends Component {
   render() {
     return (
       <div>
-        <h1 id="title">Beers</h1>
-        <table id="beers">
-          <tbody>{this.renderTableData()}</tbody>
-        </table>
+        <Paper className="paper">
+          <Table>
+            <TableHead className="table-header">
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="center">Description</TableCell>
+                <TableCell align="right">First Brewed</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{this.renderTableData()}</TableBody>
+          </Table>
+        </Paper>
       </div>
     );
   }

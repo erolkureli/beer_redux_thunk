@@ -38,4 +38,32 @@ describe("beerQuery action creator", () => {
       expect(actions[1].payload["0"].name).toEqual("Avery Brown Dredge");
     });
   });
+
+  it("dispatches BEER_QUERY_STARTED action and returns error", async () => {
+    const middlewares = [thunk];
+    const mockStore = configureStore(middlewares);
+
+    mockAxios.get.mockImplementationOnce(() =>
+      Promise.reject({
+        error: "Internal server error"
+      })
+    );
+
+    const store = mockStore({
+      beerList: {}
+    });
+
+    const queryFood = { inputFood: "Vietnamese squid salad" };
+
+    try {
+      return store.dispatch(actions.beerQuery(queryFood)).then(() => {});
+    } catch {
+      const actions = store.getActions();
+
+      expect.assertions(3);
+      expect(actions[0].type).toEqual("BEER_QUERY_STARTED");
+      expect(actions[1].type).toEqual("BEER_QUERY_FAILURE");
+      expect(actions[1].payload.error).toEqual("Internal server error");
+    }
+  });
 });

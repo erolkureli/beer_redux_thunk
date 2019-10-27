@@ -5,7 +5,6 @@ jest.unmock("redux-thunk");
 import mockAxios from "axios";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import * as types from "./types";
 import * as actions from "./index.js";
 
 describe("beerQuery action creator", () => {

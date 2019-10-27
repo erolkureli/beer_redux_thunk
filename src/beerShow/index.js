@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-class BeerSelection extends Component {
+class BeerShow extends Component {
   renderTableData() {
     const beerArray = Object.keys(this.props.beerList).map(
       i => this.props.beerList[i]
@@ -61,4 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(BeerSelection);
+export default connect(mapStateToProps)(BeerShow);

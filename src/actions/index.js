@@ -6,11 +6,11 @@ import {
 
 import axios from "axios";
 
-export const beerQuery = ({ inputFood }) => {
+export function beerQuery({ inputFood }) {
   return dispatch => {
     dispatch(beerQueryStarted());
 
-    axios
+    return axios
       .get(`https://api.punkapi.com/v2/beers?food=${inputFood}`, {})
       .then(res => {
         dispatch(beerQuerySuccess(res.data));
@@ -19,20 +19,20 @@ export const beerQuery = ({ inputFood }) => {
         dispatch(beerQueryFailure(err.message));
       });
   };
-};
+}
 
-const beerQuerySuccess = beerList => ({
+export const beerQuerySuccess = beerList => ({
   type: BEER_QUERY_SUCCESS,
   payload: {
     ...beerList
   }
 });
 
-const beerQueryStarted = () => ({
+export const beerQueryStarted = () => ({
   type: BEER_QUERY_STARTED
 });
 
-const beerQueryFailure = error => ({
+export const beerQueryFailure = error => ({
   type: BEER_QUERY_FAILURE,
   payload: {
     error

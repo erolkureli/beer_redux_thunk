@@ -6,8 +6,6 @@ import { beerQuery } from "../actions/index.js";
 
 import Button from "@material-ui/core/Button";
 
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-
 import theme from "../theme";
 
 class BeerQuery extends Component {
@@ -45,19 +43,18 @@ class BeerQuery extends Component {
           value={foodName}
           onChange={this.handleChange}
         />
-        <MuiThemeProvider>
-          <Button
-            theme={theme}
-            onClick={this.handleOnClick}
-            style={{
-              backgroundColor: theme.palette.primary.main
-            }}
-            variant="contained"
-            color="primary"
-          >
-            Send
-          </Button>
-        </MuiThemeProvider>
+
+        <Button
+          theme={theme}
+          onClick={this.handleOnClick}
+          style={{
+            backgroundColor: theme.palette.primary.main
+          }}
+          variant="contained"
+          color="primary"
+        >
+          Send
+        </Button>
       </div>
     );
   }
